@@ -1,8 +1,10 @@
 package com.amedigital.startwarsgame.planets;
 
+import static com.amedigital.startwarsgame.planets.PlanetsConstants.tatooine;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.amedigital.startwarsgame.planets.domain.Planet;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,5 +29,21 @@ public class PlanetIT {
     assertThat(response.getBody().getClimate()).isEqualTo(planet.getClimate());
     assertThat(response.getBody().getTerrain()).isEqualTo(planet.getTerrain());
     assertThat(response.getBody().getFilmsCount()).isEqualTo(planet.getFilmsCount());
+  }
+
+  @Test
+  public void listPlanets_returnsPlanets() {
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets", Planet[].class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(response.getBody()).hasSize(3);
+
+    Planet planet = response.getBody()[0];
+
+    assertThat(planet.getId()).isNotNull();
+    assertThat(planet.getName()).isEqualTo(tatooine.getName());
+    assertThat(planet.getClimate()).isEqualTo(tatooine.getClimate());
+    assertThat(planet.getTerrain()).isEqualTo(tatooine.getTerrain());
+    assertThat(planet.getFilmsCount()).isEqualTo(tatooine.getFilmsCount());
   }
 }

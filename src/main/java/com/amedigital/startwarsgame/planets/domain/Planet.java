@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "planets")
 public class Planet {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +65,12 @@ public class Planet {
 
   public void setFilmsCount(Integer filmsCount) {
     this.filmsCount = filmsCount;
+  }
+
+  @Override
+  public String toString() {
+    return "Planet [Climate=" + Climate + ", filmsCount=" + filmsCount + ", id=" + id + ", name=" + name + ", terrain="
+        + terrain + "]";
   }
 
 }
