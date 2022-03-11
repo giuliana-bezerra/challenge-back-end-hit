@@ -6,6 +6,7 @@ import com.amedigital.startwarsgame.planets.domain.Planet;
 import com.amedigital.startwarsgame.planets.domain.PlanetService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/planets")
@@ -44,7 +46,11 @@ public class PlanetController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> remove(@PathVariable("id") Long id) {
-    planetService.remove(id);
-    return ResponseEntity.ok().build();
+    try {
+      planetService.remove(id);
+      return ResponseEntity.ok().build();
+    } catch (EmptyResultDataAccessException ex) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "planet not found", ex);
+    }
   }
 }

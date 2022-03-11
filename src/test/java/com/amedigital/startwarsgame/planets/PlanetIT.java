@@ -81,9 +81,16 @@ public class PlanetIT {
   }
 
   @Test
-  public void removePlanet_ReturnsOk() {
+  public void removePlanet_WithExistingId_ReturnsOk() {
     ResponseEntity<Void> response = restTemplate.exchange("/planets/2", HttpMethod.DELETE, null, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+  }
+
+  @Test
+  public void removePlanet_WithNonExistingId_ReturnsNotFound() {
+    ResponseEntity<Void> response = restTemplate.exchange("/planets/22", HttpMethod.DELETE, null, Void.class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
   }
 }
