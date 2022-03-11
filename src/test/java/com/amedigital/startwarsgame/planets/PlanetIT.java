@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -77,5 +78,12 @@ public class PlanetIT {
     assertThat(response.getBody().getClimate()).isEqualTo(tatooine.getClimate());
     assertThat(response.getBody().getTerrain()).isEqualTo(tatooine.getTerrain());
     assertThat(response.getBody().getFilmsCount()).isEqualTo(tatooine.getFilmsCount());
+  }
+
+  @Test
+  public void removePlanet_ReturnsOk() {
+    ResponseEntity<Void> response = restTemplate.exchange("/planets/2", HttpMethod.DELETE, null, Void.class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
   }
 }

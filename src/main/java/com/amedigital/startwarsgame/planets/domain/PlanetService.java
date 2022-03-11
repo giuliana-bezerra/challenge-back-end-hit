@@ -26,4 +26,8 @@ public class PlanetService {
   public Optional<Planet> get(Long id) {
     return planetRepository.findById(id);
   }
+
+  public void remove(Long id) {
+    planetRepository.deleteById(id);
+  }
 }
