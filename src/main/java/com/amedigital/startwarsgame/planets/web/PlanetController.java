@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,12 @@ public class PlanetController {
   public ResponseEntity<List<Planet>> list(@RequestParam(required = false) Long id,
       @RequestParam(required = false) String name) {
     List<Planet> planets = planetService.list(id, name);
-    System.out.println("Planets: " + planets);
     return ResponseEntity.ok(planets);
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Planet> get(@PathVariable("id") Long id) {
+    return planetService.get(id).map(planet -> ResponseEntity.ok(planet))
+        .orElseGet(() -> ResponseEntity.notFound().build());
   }
 }

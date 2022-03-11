@@ -32,7 +32,7 @@ public class PlanetIT {
   }
 
   @Test
-  public void listPlanets_returnsPlanets() {
+  public void listPlanets_ReturnsPlanets() {
     ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets", Planet[].class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -48,7 +48,7 @@ public class PlanetIT {
   }
 
   @Test
-  public void listPlanets_ByName_returnsPlanets() {
+  public void listPlanets_ByName_ReturnsPlanets() {
     ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?name=" + tatooine.getName(),
         Planet[].class);
 
@@ -58,12 +58,24 @@ public class PlanetIT {
   }
 
   @Test
-  public void listPlanets_ById_returnsPlanets() {
+  public void listPlanets_ById_ReturnsPlanets() {
     ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?id=1",
         Planet[].class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody()).hasSize(1);
     assertThat(response.getBody()[0].getId()).isEqualTo(1L);
+  }
+
+  @Test
+  public void getPlanet_ById_ReturnsPlanet() {
+    ResponseEntity<Planet> response = restTemplate.getForEntity("/planets/1", Planet.class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(response.getBody().getId()).isEqualTo(1L);
+    assertThat(response.getBody().getName()).isEqualTo(tatooine.getName());
+    assertThat(response.getBody().getClimate()).isEqualTo(tatooine.getClimate());
+    assertThat(response.getBody().getTerrain()).isEqualTo(tatooine.getTerrain());
+    assertThat(response.getBody().getFilmsCount()).isEqualTo(tatooine.getFilmsCount());
   }
 }
