@@ -20,6 +20,11 @@ public class Planet {
   public Planet() {
   }
 
+  public Planet(Long id, String name) {
+    this.id = id;
+    this.name = name;
+  }
+
   public Planet(String name, String climate, String terrain, Integer filmsCount) {
     this.name = name;
     Climate = climate;

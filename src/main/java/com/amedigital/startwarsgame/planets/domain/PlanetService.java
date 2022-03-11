@@ -2,7 +2,10 @@ package com.amedigital.startwarsgame.planets.domain;
 
 import java.util.List;
 
+import com.amedigital.common.QueryBuilder;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +17,8 @@ public class PlanetService {
     return planetRepository.save(planet);
   }
 
-  public List<Planet> list() {
-    return planetRepository.findAll();
+  public List<Planet> list(Long id, String name) {
+    Example<Planet> query = QueryBuilder.makeQuery(new Planet(id, name));
+    return planetRepository.findAll(query);
   }
 }

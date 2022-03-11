@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,8 +28,10 @@ public class PlanetController {
   }
 
   @GetMapping
-  public ResponseEntity<List<Planet>> list() {
-    List<Planet> planets = planetService.list();
+  public ResponseEntity<List<Planet>> list(@RequestParam(required = false) Long id,
+      @RequestParam(required = false) String name) {
+    List<Planet> planets = planetService.list(id, name);
+    System.out.println("Planets: " + planets);
     return ResponseEntity.ok(planets);
   }
 }

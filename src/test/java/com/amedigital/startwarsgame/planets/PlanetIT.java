@@ -46,4 +46,24 @@ public class PlanetIT {
     assertThat(planet.getTerrain()).isEqualTo(tatooine.getTerrain());
     assertThat(planet.getFilmsCount()).isEqualTo(tatooine.getFilmsCount());
   }
+
+  @Test
+  public void listPlanets_ByName_returnsPlanets() {
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?name=" + tatooine.getName(),
+        Planet[].class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(response.getBody()).hasSize(1);
+    assertThat(response.getBody()[0].getName()).isEqualTo(tatooine.getName());
+  }
+
+  @Test
+  public void listPlanets_ById_returnsPlanets() {
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?id=1",
+        Planet[].class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(response.getBody()).hasSize(1);
+    assertThat(response.getBody()[0].getId()).isEqualTo(1L);
+  }
 }
