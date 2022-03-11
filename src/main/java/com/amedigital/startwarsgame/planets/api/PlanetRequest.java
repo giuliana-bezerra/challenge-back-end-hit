@@ -1,20 +1,9 @@
-package com.amedigital.startwarsgame.planets.domain;
+package com.amedigital.startwarsgame.planets.api;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "planets")
-public class Planet {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
+public class PlanetRequest {
   @NotEmpty(message = "name is required")
   private String name;
 
@@ -27,27 +16,18 @@ public class Planet {
   @NotNull(message = "filmsCount is required")
   private Integer filmsCount;
 
-  public Planet() {
+  public PlanetRequest() {
+
   }
 
-  public Planet(Long id, String name) {
-    this.id = id;
-    this.name = name;
-  }
-
-  public Planet(String name, String climate, String terrain, Integer filmsCount) {
+  public PlanetRequest(String name,
+      String climate,
+      String terrain,
+      Integer filmsCount) {
     this.name = name;
     this.climate = climate;
     this.terrain = terrain;
     this.filmsCount = filmsCount;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
   public String getName() {
@@ -80,12 +60,6 @@ public class Planet {
 
   public void setFilmsCount(Integer filmsCount) {
     this.filmsCount = filmsCount;
-  }
-
-  @Override
-  public String toString() {
-    return "Planet [Climate=" + climate + ", filmsCount=" + filmsCount + ", id=" + id + ", name=" + name + ", terrain="
-        + terrain + "]";
   }
 
 }

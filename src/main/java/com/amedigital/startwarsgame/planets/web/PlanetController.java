@@ -1,9 +1,15 @@
 package com.amedigital.startwarsgame.planets.web;
 
+import static com.amedigital.startwarsgame.planets.web.PlanetMapper.toListResponse;
+import static com.amedigital.startwarsgame.planets.web.PlanetMapper.toPlanet;
+import static com.amedigital.startwarsgame.planets.web.PlanetMapper.toResponse;
+
 import java.util.List;
 
 import javax.validation.Valid;
 
+import com.amedigital.startwarsgame.planets.api.PlanetRequest;
+import com.amedigital.startwarsgame.planets.api.PlanetResponse;
 import com.amedigital.startwarsgame.planets.domain.Planet;
 import com.amedigital.startwarsgame.planets.domain.PlanetService;
 
@@ -28,21 +34,21 @@ public class PlanetController {
   private PlanetService planetService;
 
   @PostMapping
-  public ResponseEntity<Planet> create(@RequestBody @Valid Planet planet) {
-    Planet createdPlanet = planetService.create(planet);
-    return ResponseEntity.status(HttpStatus.CREATED).body(createdPlanet);
+  public ResponseEntity<PlanetResponse> create(@RequestBody @Valid PlanetRequest planet) {
+    Planet createdPlanet = planetService.create(toPlanet(planet));
+    return ResponseEntity.status(HttpStatus.CREATED).body(toResponse(createdPlanet));
   }
 
   @GetMapping
-  public ResponseEntity<List<Planet>> list(@RequestParam(required = false) Long id,
+  public ResponseEntity<List<PlanetResponse>> list(@RequestParam(required = false) Long id,
       @RequestParam(required = false) String name) {
     List<Planet> planets = planetService.list(id, name);
-    return ResponseEntity.ok(planets);
+    return ResponseEntity.ok(toListResponse(planets));
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Planet> get(@PathVariable("id") Long id) {
-    return planetService.get(id).map(planet -> ResponseEntity.ok(planet))
+  public ResponseEntity<PlanetResponse> get(@PathVariable("id") Long id) {
+    return planetService.get(id).map(planet -> ResponseEntity.ok(toResponse(planet)))
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
