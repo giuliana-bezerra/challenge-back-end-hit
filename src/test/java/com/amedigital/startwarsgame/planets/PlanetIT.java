@@ -49,7 +49,7 @@ public class PlanetIT {
   }
 
   @Test
-  public void listPlanets_ByName_ReturnsPlanets() {
+  public void listPlanets_ByExistingName_ReturnsPlanets() {
     ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?name=" + tatooine.getName(),
         Planet[].class);
 
@@ -59,7 +59,16 @@ public class PlanetIT {
   }
 
   @Test
-  public void listPlanets_ById_ReturnsPlanets() {
+  public void listPlanets_ByUnexistingName_ReturnsPlanets() {
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?name=null",
+        Planet[].class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(response.getBody()).hasSize(0);
+  }
+
+  @Test
+  public void listPlanets_ByExistingId_ReturnsPlanets() {
     ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?id=1",
         Planet[].class);
 
@@ -69,7 +78,16 @@ public class PlanetIT {
   }
 
   @Test
-  public void getPlanet_ById_ReturnsPlanet() {
+  public void listPlanets_ByUnexistingId_ReturnsEmpty() {
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?id=22",
+        Planet[].class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(response.getBody()).hasSize(0);
+  }
+
+  @Test
+  public void getPlanet_ByExistingId_ReturnsPlanet() {
     ResponseEntity<Planet> response = restTemplate.getForEntity("/planets/1", Planet.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -81,6 +99,13 @@ public class PlanetIT {
   }
 
   @Test
+  public void getPlanet_ByUnexistingId_ReturnsNotFound() {
+    ResponseEntity<Object> response = restTemplate.getForEntity("/planets/22", Object.class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+  }
+
+  @Test
   public void removePlanet_WithExistingId_ReturnsOk() {
     ResponseEntity<Void> response = restTemplate.exchange("/planets/2", HttpMethod.DELETE, null, Void.class);
 
@@ -88,7 +113,7 @@ public class PlanetIT {
   }
 
   @Test
-  public void removePlanet_WithNonExistingId_ReturnsNotFound() {
+  public void removePlanet_WithUnexistingId_ReturnsNotFound() {
     ResponseEntity<Void> response = restTemplate.exchange("/planets/22", HttpMethod.DELETE, null, Void.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
