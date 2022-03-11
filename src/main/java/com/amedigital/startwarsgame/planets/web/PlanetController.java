@@ -2,6 +2,8 @@ package com.amedigital.startwarsgame.planets.web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.amedigital.startwarsgame.planets.domain.Planet;
 import com.amedigital.startwarsgame.planets.domain.PlanetService;
 
@@ -26,7 +28,7 @@ public class PlanetController {
   private PlanetService planetService;
 
   @PostMapping
-  public ResponseEntity<Planet> create(@RequestBody Planet planet) {
+  public ResponseEntity<Planet> create(@RequestBody @Valid Planet planet) {
     Planet createdPlanet = planetService.create(planet);
     return ResponseEntity.status(HttpStatus.CREATED).body(createdPlanet);
   }

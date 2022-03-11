@@ -3,6 +3,7 @@ package com.amedigital.startwarsgame.planets;
 import static com.amedigital.startwarsgame.planets.PlanetsConstants.tatooine;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.amedigital.startwarsgame.common.error.ErrorResponse;
 import com.amedigital.startwarsgame.planets.domain.Planet;
 
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class PlanetIT {
   private TestRestTemplate restTemplate;
 
   @Test
-  public void createPlanet_returnsCreated() {
+  public void createPlanet_WithValidData_ReturnsCreated() {
     Planet planet = new Planet("name", "climate", "terrain", 1);
     ResponseEntity<Planet> response = restTemplate.postForEntity("/planets", planet, Planet.class);
 
@@ -30,6 +31,26 @@ public class PlanetIT {
     assertThat(response.getBody().getClimate()).isEqualTo(planet.getClimate());
     assertThat(response.getBody().getTerrain()).isEqualTo(planet.getTerrain());
     assertThat(response.getBody().getFilmsCount()).isEqualTo(planet.getFilmsCount());
+  }
+
+  @Test
+  public void createPlanet_WithInvalidData_ReturnsBadRequest() {
+    Planet emptyPlanet = new Planet(null, null, null, null);
+    Planet invalidPlanet = new Planet("", "", "", null);
+
+    ResponseEntity<ErrorResponse> responseEmpty = restTemplate.postForEntity("/planets", emptyPlanet,
+        ErrorResponse.class);
+    ResponseEntity<ErrorResponse> responseInvalid = restTemplate.postForEntity("/planets", invalidPlanet,
+        ErrorResponse.class);
+
+    System.out.println(responseEmpty.getBody().getDetails());
+    assertThat(responseEmpty.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
+    assertThat(responseEmpty.getBody().getMessage()).isEqualTo("validation failed");
+    assertThat(responseEmpty.getBody().getDetails()).hasSize(4);
+
+    assertThat(responseInvalid.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
+    assertThat(responseInvalid.getBody().getMessage()).isEqualTo("validation failed");
+    assertThat(responseInvalid.getBody().getDetails()).hasSize(4);
   }
 
   @Test

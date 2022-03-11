@@ -1,4 +1,4 @@
-package com.amedigital.common.repository;
+package com.amedigital.startwarsgame.common.repository;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;

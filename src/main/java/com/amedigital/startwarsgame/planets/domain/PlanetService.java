@@ -3,7 +3,7 @@ package com.amedigital.startwarsgame.planets.domain;
 import java.util.List;
 import java.util.Optional;
 
-import com.amedigital.common.repository.QueryBuilder;
+import com.amedigital.startwarsgame.common.repository.QueryBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

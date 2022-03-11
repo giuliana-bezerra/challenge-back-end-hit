@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "planets")
@@ -12,9 +14,17 @@ public class Planet {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @NotEmpty(message = "name is required")
   private String name;
+
+  @NotEmpty(message = "climate is required")
   private String Climate;
+
+  @NotEmpty(message = "terrain is required")
   private String terrain;
+
+  @NotNull(message = "filmsCount is required")
   private Integer filmsCount;
 
   public Planet() {
