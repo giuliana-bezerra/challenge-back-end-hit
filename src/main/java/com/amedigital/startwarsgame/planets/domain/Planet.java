@@ -8,6 +8,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 @Entity
 @Table(name = "planets")
 public class Planet {
@@ -88,4 +90,8 @@ public class Planet {
         + terrain + "]";
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    return EqualsBuilder.reflectionEquals(this, obj);
+  }
 }
