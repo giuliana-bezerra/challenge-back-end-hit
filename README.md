@@ -37,13 +37,13 @@ This project was created to solve the challenged proposed in [this repository](h
 
 The challenge was solved as follows:
 
-- TDD for developing each functionality
-- Controller for managing planet resource
-- Spring Data for saving planet data (H2 database for tests and Mysql for development environment)
-- Swagger documentation for the API
-- Bean validation for bad request scenarios
-- Exception handlers to standartize responses
-- Calls to an [external API](https://swapi.co/) to query Star Wars data
+[x] TDD for developing each functionality
+[x] Controller for managing planet resource
+[x] Spring Data for saving planet data (H2 database for tests and Mysql for development environment)
+[x] Swagger documentation for the API
+[x] Bean validation for bad request scenarios
+[x] Exception handlers to standartize responses
+[x] Calls to an [external API](https://swapi.co/) to query Star Wars data
 
 ## 🛠️ Configuration
 
