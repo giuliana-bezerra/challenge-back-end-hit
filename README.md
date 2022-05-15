@@ -31,7 +31,7 @@
 ## 💻 Project
 
 API for providing information about Star Wars franchise.
-This project was created to solve the challenge proposed [here](https://github.com/AmeDigital/challenge-back-end).
+This project was created to solve the challenge proposed [here](https://github.com/AmeDigital/challenge-back-end-hit).
 
 ## 💡 Solution
 
