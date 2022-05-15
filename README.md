@@ -41,7 +41,7 @@ The challenge was solved as follows:
 
 [x] Controller for managing planet resource
 
-[x] Spring Data for saving planet data (H2 database)
+[x] Spring Data for saving planet data (H2 database for testing, Mysql for production)
 
 [x] Swagger documentation for the API
 
