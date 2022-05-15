@@ -5,8 +5,8 @@ import org.springframework.data.domain.ExampleMatcher;
 
 public class QueryBuilder<T> {
   public static <T> Example<T> makeQuery(T obj) {
-    ExampleMatcher caseInsensitiveExampleMatcher = ExampleMatcher.matchingAll().withIgnoreCase();
-    Example<T> query = Example.of(obj, caseInsensitiveExampleMatcher);
+    ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll().withIgnoreCase().withIgnoreNullValues();
+    Example<T> query = Example.of(obj, exampleMatcher);
     return query;
   }
 }

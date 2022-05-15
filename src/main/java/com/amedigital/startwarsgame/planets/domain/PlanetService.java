@@ -18,8 +18,8 @@ public class PlanetService {
     return planetRepository.save(planet);
   }
 
-  public List<Planet> list(Long id, String name) {
-    Example<Planet> query = QueryBuilder.makeQuery(new Planet(id, name));
+  public List<Planet> list(String terrain, String climate, Integer filmsCount) {
+    Example<Planet> query = QueryBuilder.makeQuery(new Planet(climate, terrain, filmsCount));
     return planetRepository.findAll(query);
   }
 
@@ -27,7 +27,12 @@ public class PlanetService {
     return planetRepository.findById(id);
   }
 
+  public Optional<Planet> getByName(String name) {
+    return planetRepository.findByName(name);
+  }
+
   public void remove(Long id) {
     planetRepository.deleteById(id);
   }
+
 }

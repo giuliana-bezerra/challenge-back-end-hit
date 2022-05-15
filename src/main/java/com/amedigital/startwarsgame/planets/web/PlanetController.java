@@ -40,15 +40,21 @@ public class PlanetController {
   }
 
   @GetMapping
-  public ResponseEntity<List<PlanetResponse>> list(@RequestParam(required = false) Long id,
-      @RequestParam(required = false) String name) {
-    List<Planet> planets = planetService.list(id, name);
+  public ResponseEntity<List<PlanetResponse>> list(@RequestParam(required = false) String terrain,
+      @RequestParam(required = false) String climate, Integer filmsCount) {
+    List<Planet> planets = planetService.list(terrain, climate, filmsCount);
     return ResponseEntity.ok(toListResponse(planets));
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<PlanetResponse> get(@PathVariable("id") Long id) {
     return planetService.get(id).map(planet -> ResponseEntity.ok(toResponse(planet)))
+        .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
+  @GetMapping("/name/{name}")
+  public ResponseEntity<PlanetResponse> getByName(@PathVariable("name") String name) {
+    return planetService.getByName(name).map(planet -> ResponseEntity.ok(toResponse(planet)))
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 

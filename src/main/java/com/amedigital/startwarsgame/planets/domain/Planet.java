@@ -8,8 +8,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-
 @Entity
 @Table(name = "planets")
 public class Planet {
@@ -32,9 +30,10 @@ public class Planet {
   public Planet() {
   }
 
-  public Planet(Long id, String name) {
-    this.id = id;
-    this.name = name;
+  public Planet(String climate, String terrain, Integer filmsCount) {
+    this.climate = climate;
+    this.terrain = terrain;
+    this.filmsCount = filmsCount;
   }
 
   public Planet(String name, String climate, String terrain, Integer filmsCount) {
@@ -88,10 +87,5 @@ public class Planet {
   public String toString() {
     return "Planet [Climate=" + climate + ", filmsCount=" + filmsCount + ", id=" + id + ", name=" + name + ", terrain="
         + terrain + "]";
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
   }
 }

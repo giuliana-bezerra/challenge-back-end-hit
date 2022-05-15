@@ -43,7 +43,6 @@ public class PlanetIT {
     ResponseEntity<ErrorResponse> responseInvalid = restTemplate.postForEntity("/planets", invalidPlanet,
         ErrorResponse.class);
 
-    System.out.println(responseEmpty.getBody().getDetails());
     assertThat(responseEmpty.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
     assertThat(responseEmpty.getBody().getMessage()).isEqualTo("validation failed");
     assertThat(responseEmpty.getBody().getDetails()).hasSize(4);
@@ -70,8 +69,8 @@ public class PlanetIT {
   }
 
   @Test
-  public void listPlanets_ByExistingName_ReturnsPlanets() {
-    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?name=" + tatooine.getName(),
+  public void listPlanets_ByExistingClimate_ReturnsPlanets() {
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?climate=" + tatooine.getClimate(),
         Planet[].class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -80,8 +79,8 @@ public class PlanetIT {
   }
 
   @Test
-  public void listPlanets_ByUnexistingName_ReturnsPlanets() {
-    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?name=null",
+  public void listPlanets_ByUnexistingClimate_ReturnsEmpty() {
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?climate=null",
         Planet[].class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -89,8 +88,8 @@ public class PlanetIT {
   }
 
   @Test
-  public void listPlanets_ByExistingId_ReturnsPlanets() {
-    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?id=1",
+  public void listPlanets_ByExistingTerrain_ReturnsPlanets() {
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?terrain=" + tatooine.getTerrain(),
         Planet[].class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -99,8 +98,8 @@ public class PlanetIT {
   }
 
   @Test
-  public void listPlanets_ByUnexistingId_ReturnsEmpty() {
-    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?id=22",
+  public void listPlanets_ByUnexistingTerrain_ReturnsEmpty() {
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?terrain=null",
         Planet[].class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -122,6 +121,25 @@ public class PlanetIT {
   @Test
   public void getPlanet_ByUnexistingId_ReturnsNotFound() {
     ResponseEntity<Object> response = restTemplate.getForEntity("/planets/22", Object.class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+  }
+
+  @Test
+  public void getPlanet_ByExistingName_ReturnsPlanet() {
+    ResponseEntity<Planet> response = restTemplate.getForEntity("/planets/name/" + tatooine.getName(), Planet.class);
+
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(response.getBody().getId()).isEqualTo(1L);
+    assertThat(response.getBody().getName()).isEqualTo(tatooine.getName());
+    assertThat(response.getBody().getClimate()).isEqualTo(tatooine.getClimate());
+    assertThat(response.getBody().getTerrain()).isEqualTo(tatooine.getTerrain());
+    assertThat(response.getBody().getFilmsCount()).isEqualTo(tatooine.getFilmsCount());
+  }
+
+  @Test
+  public void getPlanet_ByUnexistingName_ReturnsNotFound() {
+    ResponseEntity<Object> response = restTemplate.getForEntity("/planets/name/null", Object.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
   }
