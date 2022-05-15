@@ -39,7 +39,7 @@ The challenge was solved as follows:
 
 [x] Controller for managing planet resource
 
-[x] Spring Data for saving planet data (H2 database for tests and Mysql for development environment)
+[x] Spring Data for saving planet data (H2 database)
 
 [x] Swagger documentation for the API
 
@@ -48,6 +48,8 @@ The challenge was solved as follows:
 [x] Exception handlers to standartize responses
 
 [x] Calls to an [external API](https://swapi.co/) to query Star Wars data
+
+[x] Query by Example for searching planets
 
 ## 🚀 Build and Run
 
