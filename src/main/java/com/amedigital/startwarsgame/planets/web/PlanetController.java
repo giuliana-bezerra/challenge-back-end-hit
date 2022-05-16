@@ -41,7 +41,7 @@ public class PlanetController {
 
   @GetMapping
   public ResponseEntity<List<PlanetResponse>> list(@RequestParam(required = false) String terrain,
-      @RequestParam(required = false) String climate, Integer filmsCount) {
+      @RequestParam(required = false) String climate, @RequestParam(required = false) Integer filmsCount) {
     List<Planet> planets = planetService.list(terrain, climate, filmsCount);
     return ResponseEntity.ok(toListResponse(planets));
   }
