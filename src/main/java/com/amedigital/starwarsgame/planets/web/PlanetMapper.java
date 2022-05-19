@@ -1,11 +1,11 @@
-package com.amedigital.startwarsgame.planets.web;
+package com.amedigital.starwarsgame.planets.web;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.amedigital.startwarsgame.planets.api.PlanetRequest;
-import com.amedigital.startwarsgame.planets.api.PlanetResponse;
-import com.amedigital.startwarsgame.planets.domain.Planet;
+import com.amedigital.starwarsgame.planets.api.PlanetRequest;
+import com.amedigital.starwarsgame.planets.api.PlanetResponse;
+import com.amedigital.starwarsgame.planets.domain.Planet;
 
 public class PlanetMapper {
   public static Planet toPlanet(PlanetRequest planetRequest) {

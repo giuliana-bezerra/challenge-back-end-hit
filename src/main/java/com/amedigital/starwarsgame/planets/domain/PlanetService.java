@@ -1,18 +1,20 @@
-package com.amedigital.startwarsgame.planets.domain;
+package com.amedigital.starwarsgame.planets.domain;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.amedigital.startwarsgame.common.repository.QueryBuilder;
+import com.amedigital.starwarsgame.common.repository.QueryBuilder;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PlanetService {
-  @Autowired
   private PlanetRepository planetRepository;
+
+  public PlanetService(PlanetRepository planetRepository) {
+    this.planetRepository = planetRepository;
+  }
 
   public Planet create(Planet planet) {
     return planetRepository.save(planet);

@@ -1,10 +1,9 @@
-package com.amedigital.startwarsgame.planets;
+package com.amedigital.starwarsgame.planets;
 
-import static com.amedigital.startwarsgame.planets.PlanetsConstants.tatooine;
+import static com.amedigital.starwarsgame.planets.PlanetsConstants.TATOOINE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.amedigital.startwarsgame.common.error.ErrorResponse;
-import com.amedigital.startwarsgame.planets.domain.Planet;
+import com.amedigital.starwarsgame.planets.domain.Planet;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,26 +33,7 @@ public class PlanetIT {
   }
 
   @Test
-  public void createPlanet_WithInvalidData_ReturnsBadRequest() {
-    Planet emptyPlanet = new Planet(null, null, null, null);
-    Planet invalidPlanet = new Planet("", "", "", null);
-
-    ResponseEntity<ErrorResponse> responseEmpty = restTemplate.postForEntity("/planets", emptyPlanet,
-        ErrorResponse.class);
-    ResponseEntity<ErrorResponse> responseInvalid = restTemplate.postForEntity("/planets", invalidPlanet,
-        ErrorResponse.class);
-
-    assertThat(responseEmpty.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
-    assertThat(responseEmpty.getBody().getMessage()).isEqualTo("validation failed");
-    assertThat(responseEmpty.getBody().getDetails()).hasSize(4);
-
-    assertThat(responseInvalid.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
-    assertThat(responseInvalid.getBody().getMessage()).isEqualTo("validation failed");
-    assertThat(responseInvalid.getBody().getDetails()).hasSize(4);
-  }
-
-  @Test
-  public void listPlanets_ReturnsPlanets() {
+  public void listPlanets_ReturnsAllPlanets() {
     ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets", Planet[].class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -62,20 +42,20 @@ public class PlanetIT {
     Planet planet = response.getBody()[0];
 
     assertThat(planet.getId()).isNotNull();
-    assertThat(planet.getName()).isEqualTo(tatooine.getName());
-    assertThat(planet.getClimate()).isEqualTo(tatooine.getClimate());
-    assertThat(planet.getTerrain()).isEqualTo(tatooine.getTerrain());
-    assertThat(planet.getFilmsCount()).isEqualTo(tatooine.getFilmsCount());
+    assertThat(planet.getName()).isEqualTo(TATOOINE.getName());
+    assertThat(planet.getClimate()).isEqualTo(TATOOINE.getClimate());
+    assertThat(planet.getTerrain()).isEqualTo(TATOOINE.getTerrain());
+    assertThat(planet.getFilmsCount()).isEqualTo(TATOOINE.getFilmsCount());
   }
 
   @Test
   public void listPlanets_ByExistingClimate_ReturnsPlanets() {
-    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?climate=" + tatooine.getClimate(),
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?climate=" + TATOOINE.getClimate(),
         Planet[].class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody()).hasSize(1);
-    assertThat(response.getBody()[0].getName()).isEqualTo(tatooine.getName());
+    assertThat(response.getBody()[0].getName()).isEqualTo(TATOOINE.getName());
   }
 
   @Test
@@ -89,7 +69,7 @@ public class PlanetIT {
 
   @Test
   public void listPlanets_ByExistingTerrain_ReturnsPlanets() {
-    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?terrain=" + tatooine.getTerrain(),
+    ResponseEntity<Planet[]> response = restTemplate.getForEntity("/planets?terrain=" + TATOOINE.getTerrain(),
         Planet[].class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -112,10 +92,10 @@ public class PlanetIT {
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody().getId()).isEqualTo(1L);
-    assertThat(response.getBody().getName()).isEqualTo(tatooine.getName());
-    assertThat(response.getBody().getClimate()).isEqualTo(tatooine.getClimate());
-    assertThat(response.getBody().getTerrain()).isEqualTo(tatooine.getTerrain());
-    assertThat(response.getBody().getFilmsCount()).isEqualTo(tatooine.getFilmsCount());
+    assertThat(response.getBody().getName()).isEqualTo(TATOOINE.getName());
+    assertThat(response.getBody().getClimate()).isEqualTo(TATOOINE.getClimate());
+    assertThat(response.getBody().getTerrain()).isEqualTo(TATOOINE.getTerrain());
+    assertThat(response.getBody().getFilmsCount()).isEqualTo(TATOOINE.getFilmsCount());
   }
 
   @Test
@@ -127,14 +107,14 @@ public class PlanetIT {
 
   @Test
   public void getPlanet_ByExistingName_ReturnsPlanet() {
-    ResponseEntity<Planet> response = restTemplate.getForEntity("/planets/name/" + tatooine.getName(), Planet.class);
+    ResponseEntity<Planet> response = restTemplate.getForEntity("/planets/name/" + TATOOINE.getName(), Planet.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody().getId()).isEqualTo(1L);
-    assertThat(response.getBody().getName()).isEqualTo(tatooine.getName());
-    assertThat(response.getBody().getClimate()).isEqualTo(tatooine.getClimate());
-    assertThat(response.getBody().getTerrain()).isEqualTo(tatooine.getTerrain());
-    assertThat(response.getBody().getFilmsCount()).isEqualTo(tatooine.getFilmsCount());
+    assertThat(response.getBody().getName()).isEqualTo(TATOOINE.getName());
+    assertThat(response.getBody().getClimate()).isEqualTo(TATOOINE.getClimate());
+    assertThat(response.getBody().getTerrain()).isEqualTo(TATOOINE.getTerrain());
+    assertThat(response.getBody().getFilmsCount()).isEqualTo(TATOOINE.getFilmsCount());
   }
 
   @Test

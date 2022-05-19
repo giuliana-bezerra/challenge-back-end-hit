@@ -1,13 +1,13 @@
-package com.amedigital.startwarsgame;
+package com.amedigital.starwarsgame;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StartwarsGameApplication {
+public class StarwarsGameApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StartwarsGameApplication.class, args);
+		SpringApplication.run(StarwarsGameApplication.class, args);
 	}
 
 }

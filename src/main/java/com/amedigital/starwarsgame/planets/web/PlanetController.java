@@ -1,17 +1,17 @@
-package com.amedigital.startwarsgame.planets.web;
+package com.amedigital.starwarsgame.planets.web;
 
-import static com.amedigital.startwarsgame.planets.web.PlanetMapper.toListResponse;
-import static com.amedigital.startwarsgame.planets.web.PlanetMapper.toPlanet;
-import static com.amedigital.startwarsgame.planets.web.PlanetMapper.toResponse;
+import static com.amedigital.starwarsgame.planets.web.PlanetMapper.toListResponse;
+import static com.amedigital.starwarsgame.planets.web.PlanetMapper.toPlanet;
+import static com.amedigital.starwarsgame.planets.web.PlanetMapper.toResponse;
 
 import java.util.List;
 
 import javax.validation.Valid;
 
-import com.amedigital.startwarsgame.planets.api.PlanetRequest;
-import com.amedigital.startwarsgame.planets.api.PlanetResponse;
-import com.amedigital.startwarsgame.planets.domain.Planet;
-import com.amedigital.startwarsgame.planets.domain.PlanetService;
+import com.amedigital.starwarsgame.planets.api.PlanetRequest;
+import com.amedigital.starwarsgame.planets.api.PlanetResponse;
+import com.amedigital.starwarsgame.planets.domain.Planet;
+import com.amedigital.starwarsgame.planets.domain.PlanetService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

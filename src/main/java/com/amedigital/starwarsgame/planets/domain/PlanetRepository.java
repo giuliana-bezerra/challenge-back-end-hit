@@ -1,4 +1,4 @@
-package com.amedigital.startwarsgame.planets.domain;
+package com.amedigital.starwarsgame.planets.domain;
 
 import java.util.List;
 import java.util.Optional;

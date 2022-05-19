@@ -1,4 +1,4 @@
-package com.amedigital.startwarsgame.planets.api;
+package com.amedigital.starwarsgame.planets.api;
 
 import java.util.List;
 

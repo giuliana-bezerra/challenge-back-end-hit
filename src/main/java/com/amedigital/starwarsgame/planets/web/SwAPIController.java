@@ -1,9 +1,9 @@
-package com.amedigital.startwarsgame.planets.web;
+package com.amedigital.starwarsgame.planets.web;
 
 import java.util.List;
 
-import com.amedigital.startwarsgame.planets.api.PlanetResponse;
-import com.amedigital.startwarsgame.planets.api.SwAPIResponse;
+import com.amedigital.starwarsgame.planets.api.PlanetResponse;
+import com.amedigital.starwarsgame.planets.api.SwAPIResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;

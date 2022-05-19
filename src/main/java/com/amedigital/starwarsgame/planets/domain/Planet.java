@@ -1,4 +1,4 @@
-package com.amedigital.startwarsgame.planets.domain;
+package com.amedigital.starwarsgame.planets.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 @Entity
 @Table(name = "planets")
@@ -88,4 +90,10 @@ public class Planet {
     return "Planet [Climate=" + climate + ", filmsCount=" + filmsCount + ", id=" + id + ", name=" + name + ", terrain="
         + terrain + "]";
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    return EqualsBuilder.reflectionEquals(obj, this);
+  }
+
 }

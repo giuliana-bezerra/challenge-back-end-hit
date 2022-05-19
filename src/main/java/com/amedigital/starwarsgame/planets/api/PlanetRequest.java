@@ -1,4 +1,4 @@
-package com.amedigital.startwarsgame.planets.api;
+package com.amedigital.starwarsgame.planets.api;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

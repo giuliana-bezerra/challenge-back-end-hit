@@ -1,4 +1,4 @@
-package com.amedigital.startwarsgame.planets.api;
+package com.amedigital.starwarsgame.planets.api;
 
 public class PlanetResponse {
   private Long id;
