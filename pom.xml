@@ -15,6 +15,8 @@
 	<description>Star Wars API</description>
 	<properties>
 		<java.version>11</java.version>
+		<sonar.organization>giuliana-bezerra</sonar.organization>
+  		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
